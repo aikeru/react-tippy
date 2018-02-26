@@ -1,3 +1,5 @@
+This is forked from [https://github.com/tvkhoa/react-tippy](https://github.com/tvkhoa/react-tippy). Credit for the original library goes to the author. This fork's primary purpose is to make the DOM element an optional prop, so it can be specified explicitly.
+
 ## React Tippy
 
 A lightweight tooltip for React. Demo at [Demo page here...](https://tvkhoa.github.io/testlib)
