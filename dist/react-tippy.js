@@ -534,7 +534,7 @@ var Tooltip = function (_Component) {
         return;
       }
       if (this.tippy) {
-        var popper = this.tippy.getPopperElement(this.domNode || this.tooltipDOM);
+        var popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
         this.tippy.show(popper, this.props.duration);
       }
     }
@@ -545,7 +545,7 @@ var Tooltip = function (_Component) {
         return;
       }
       if (this.tippy) {
-        var popper = this.tippy.getPopperElement(this.domNode || this.tooltipDOM);
+        var popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
         this.tippy.hide(popper, this.props.hideDuration);
       }
     }
@@ -556,7 +556,7 @@ var Tooltip = function (_Component) {
         return;
       }
       if (this.tippy) {
-        var popper = this.tippy.getPopperElement(this.domNode || this.tooltipDOM);
+        var popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
         this.tippy.updateSettings(popper, name, value);
       }
     }
@@ -568,7 +568,7 @@ var Tooltip = function (_Component) {
       }
       if (this.tippy) {
         this.updateSettings('reactDOM', this.props.html);
-        var popper = this.tippy.getPopperElement(this.domNode || this.tooltipDOM);
+        var popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
         var isVisible = popper.style.visibility === 'visible' || this.props.open;
         if (isVisible) {
           this.tippy.updateForReact(popper, this.props.html);
@@ -582,7 +582,7 @@ var Tooltip = function (_Component) {
         return;
       }
       if (this.tippy) {
-        var popper = this.tippy.getPopperElement(this.domNode || this.tooltipDOM);
+        var popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
         this.tippy.update(popper);
       }
     }
