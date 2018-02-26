@@ -128,7 +128,7 @@ class Tooltip extends Component {
       return;
     }
     if (this.tippy) {
-      const popper = this.tippy.getPopperElement(this.domNode || this.tooltipDOM);
+      const popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
       this.tippy.show(popper, this.props.duration);
     }
   }
@@ -138,7 +138,7 @@ class Tooltip extends Component {
       return;
     }
     if (this.tippy) {
-      const popper = this.tippy.getPopperElement(this.domNode || this.tooltipDOM);
+      const popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
       this.tippy.hide(popper, this.props.hideDuration);
     }
   }
@@ -148,7 +148,7 @@ class Tooltip extends Component {
       return;
     }
     if (this.tippy) {
-      const popper = this.tippy.getPopperElement(this.domNode || this.tooltipDOM);
+      const popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
       this.tippy.updateSettings(popper, name, value);
     }
   }
@@ -159,7 +159,7 @@ class Tooltip extends Component {
     }
     if (this.tippy) {
       this.updateSettings('reactDOM', this.props.html);
-      const popper = this.tippy.getPopperElement(this.domNode || this.tooltipDOM);
+      const popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
       const isVisible = popper.style.visibility === 'visible' || this.props.open;
       if (isVisible) {
         this.tippy.updateForReact(popper, this.props.html);
@@ -172,7 +172,7 @@ class Tooltip extends Component {
       return;
     }
     if (this.tippy) {
-      const popper = this.tippy.getPopperElement(this.domNode || this.tooltipDOM);
+      const popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
       this.tippy.update(popper);
     }
   }
