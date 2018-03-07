@@ -557,7 +557,9 @@ var Tooltip = function (_Component) {
       }
       if (this.tippy) {
         var popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
-        this.tippy.updateSettings(popper, name, value);
+        if (popper) {
+          this.tippy.updateSettings(popper, name, value);
+        }
       }
     }
   }, {

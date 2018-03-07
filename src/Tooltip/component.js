@@ -149,7 +149,9 @@ class Tooltip extends Component {
     }
     if (this.tippy) {
       const popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
-      this.tippy.updateSettings(popper, name, value);
+      if(popper) {
+        this.tippy.updateSettings(popper, name, value);
+      }
     }
   }
 
