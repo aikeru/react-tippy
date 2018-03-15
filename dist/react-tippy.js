@@ -596,7 +596,11 @@ var Tooltip = function (_Component) {
       }
       if (!this.props.disabled) {
         var domNode = this.props.domNode || this.tooltipDOM;
-        domNode.setAttribute && domNode.setAttribute('title', this.props.title);
+        if (!this.props.title) {
+          domNode.setAttribute('title', '');
+        } else {
+          domNode.setAttribute('title', this.props.title);
+        }
         this.tippy = (0, _tippy2.default)(domNode, {
           disabled: this.props.disabled,
           position: this.props.position,

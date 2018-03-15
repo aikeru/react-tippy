@@ -185,7 +185,8 @@ class Tooltip extends Component {
     }
     if (!this.props.disabled) {
       const domNode = this.props.domNode || this.tooltipDOM
-      domNode.setAttribute && domNode.setAttribute('title', this.props.title)
+	  if(!this.props.title) { domNode.setAttribute('title', '') }
+	  else { domNode.setAttribute('title', this.props.title) }
       this.tippy = tippy(domNode, {
         disabled: this.props.disabled,
         position: this.props.position,
