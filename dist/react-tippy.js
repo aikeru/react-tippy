@@ -517,7 +517,7 @@ var Tooltip = function (_Component) {
       }
 
       // Update content
-      if (this.props.title !== prevProps.title) {
+      if (!this.props.noTitle && this.props.title !== prevProps.title) {
         this.updateTippy();
       }
 
@@ -596,10 +596,12 @@ var Tooltip = function (_Component) {
       }
       if (!this.props.disabled) {
         var domNode = this.props.domNode || this.tooltipDOM;
-        if (!this.props.title) {
-          domNode.setAttribute('title', '');
-        } else {
-          domNode.setAttribute('title', this.props.title);
+        if (!this.props.noTitle) {
+          if (!this.props.title) {
+            domNode.setAttribute('title', '');
+          } else {
+            domNode.setAttribute('title', this.props.title);
+          }
         }
         this.tippy = (0, _tippy2.default)(domNode, {
           disabled: this.props.disabled,
@@ -657,7 +659,7 @@ var Tooltip = function (_Component) {
         var popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
         this.updateSettings('open', false);
         this.tippy.hide(popper, 0);
-        this.tippy.destroy(popper);
+        this.tippy.destroy(popper, undefined, this.props.noTitle);
         this.tippy = null;
       }
     }
@@ -666,19 +668,20 @@ var Tooltip = function (_Component) {
     value: function render() {
       var _this3 = this;
 
+      var addProps = this.props.noTitle ? {} : { title: this.props.title || '' };
       return _react2.default.createElement(
         'div',
-        {
+        _extends({
           ref: function ref(tooltip) {
             _this3.tooltipDOM = tooltip;
-          },
-          title: this.props.title,
+          }
+        }, addProps, {
           className: this.props.className,
           tabIndex: this.props.tabIndex,
           style: _extends({
             display: 'inline'
           }, this.props.style)
-        },
+        }),
         this.props.children
       );
     }
@@ -1318,13 +1321,13 @@ function createTooltips(els) {
 
 
     var title = el.getAttribute('title');
-    if (!title && !html) return a;
+    if (!title && !html && !settings.reactDOM) return a;
 
     el.setAttribute('data-tooltipped', '');
     el.setAttribute('aria-describedby', 'tippy-tooltip-' + id);
     (0, _removeTitle2.default)(el);
 
-    var popper = (0, _createPopperElement2.default)(id, title, settings);
+    var popper = (0, _createPopperElement2.default)(id, title || '', settings);
     var handlers = _getEventListenerHandlers2.default.call(_this, el, popper, settings);
 
     var listeners = [];
@@ -2426,6 +2429,8 @@ var Tippy = function () {
     value: function destroy(popper, _isLast) {
       var _this3 = this;
 
+      var noTitle = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
       if (this.state.destroyed) return;
 
       var data = (0, _find2.default)(this.store, function (data) {
@@ -2449,7 +2454,9 @@ var Tippy = function () {
       });
 
       // Restore original title
-      el.setAttribute('title', el.getAttribute('data-original-title'));
+      if (!noTitle) {
+        el.setAttribute('title', el.getAttribute('data-original-title'));
+      }
 
       el.removeAttribute('data-original-title');
       el.removeAttribute('data-tooltipped');

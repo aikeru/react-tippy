@@ -28,13 +28,13 @@ export default function createTooltips(els) {
     const { html, trigger, touchHold } = settings
 
     const title = el.getAttribute('title')
-    if (!title && !html) return a
+    if (!title && !html && !settings.reactDOM) return a
 
     el.setAttribute('data-tooltipped', '')
     el.setAttribute('aria-describedby', `tippy-tooltip-${id}`)
     removeTitle(el)
 
-    const popper = createPopperElement(id, title, settings)
+    const popper = createPopperElement(id, title || '', settings)
     const handlers = getEventListenerHandlers.call(this, el, popper, settings)
 
     let listeners = []

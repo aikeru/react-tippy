@@ -112,7 +112,7 @@ class Tooltip extends Component {
     }
 
     // Update content
-    if (this.props.title !== prevProps.title) {
+    if (!this.props.noTitle && this.props.title !== prevProps.title) {
       this.updateTippy();
     }
 
@@ -185,8 +185,10 @@ class Tooltip extends Component {
     }
     if (!this.props.disabled) {
       const domNode = this.props.domNode || this.tooltipDOM
-	  if(!this.props.title) { domNode.setAttribute('title', '') }
-	  else { domNode.setAttribute('title', this.props.title) }
+	  if(!this.props.noTitle) {
+	    if(!this.props.title) { domNode.setAttribute('title', '') }
+	    else { domNode.setAttribute('title', this.props.title) }
+	  }
       this.tippy = tippy(domNode, {
         disabled: this.props.disabled,
         position: this.props.position,
@@ -242,16 +244,17 @@ class Tooltip extends Component {
       const popper = this.tippy.getPopperElement(this.props.domNode || this.tooltipDOM);
       this.updateSettings('open', false);
       this.tippy.hide(popper, 0);
-      this.tippy.destroy(popper);
+      this.tippy.destroy(popper, undefined, this.props.noTitle);
       this.tippy = null;
     }
   }
 
   render() {
+	const addProps = this.props.noTitle ? {} : {title: this.props.title || ''}
     return (
       <div
         ref={(tooltip) => { this.tooltipDOM = tooltip; }}
-        title={this.props.title}
+		{...addProps}
         className={this.props.className}
         tabIndex={this.props.tabIndex}
         style={{

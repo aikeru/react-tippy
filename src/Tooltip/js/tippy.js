@@ -367,7 +367,7 @@ class Tippy {
   * @param {Element} popper
   * @param {Boolean} _isLast - private param used by destroyAll to optimize
   */
-  destroy(popper, _isLast) {
+  destroy(popper, _isLast, noTitle = false) {
     if (this.state.destroyed) return
 
     const data = find(this.store, data => data.popper === popper)
@@ -388,7 +388,7 @@ class Tippy {
     listeners.forEach(listener => el.removeEventListener(listener.event, listener.handler))
 
     // Restore original title
-    el.setAttribute('title', el.getAttribute('data-original-title'))
+	if(!noTitle) { el.setAttribute('title', el.getAttribute('data-original-title')) }
 
     el.removeAttribute('data-original-title')
     el.removeAttribute('data-tooltipped')
