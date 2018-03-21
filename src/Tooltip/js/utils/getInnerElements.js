@@ -6,6 +6,10 @@ import { Selectors } from '../core/globals'
 * @return {Object}
 */
 export default function getInnerElements(popper) {
+  if(!popper) {
+    console.error('No popper element')
+    return { tooltip: undefined, circle: undefined, content: undefined }
+  }
   return {
     tooltip: popper.querySelector(Selectors.TOOLTIP),
     circle: popper.querySelector(Selectors.CIRCLE),

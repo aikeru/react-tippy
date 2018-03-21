@@ -125,6 +125,10 @@ class Tippy {
   * @param {ReactElement} - content
   */
   updateForReact(popper, updatedContent) {
+    if(!popper) {
+      console.error('No popper element')
+      return
+    }
     const tooltipContent = popper.querySelector(Selectors.CONTENT)
     const data = find(this.store, data => data.popper === popper)
 
