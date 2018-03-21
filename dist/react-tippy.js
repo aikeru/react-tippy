@@ -317,6 +317,10 @@ var _globals = __webpack_require__(0);
 * @return {Object}
 */
 function getInnerElements(popper) {
+  if (!popper) {
+    console.error('No popper element');
+    return { tooltip: undefined, circle: undefined, content: undefined };
+  }
   return {
     tooltip: popper.querySelector(_globals.Selectors.TOOLTIP),
     circle: popper.querySelector(_globals.Selectors.CIRCLE),
@@ -2167,6 +2171,10 @@ var Tippy = function () {
     * @param {ReactElement} - content
     */
     value: function updateForReact(popper, updatedContent) {
+      if (!popper) {
+        console.error('No popper element');
+        return;
+      }
       var tooltipContent = popper.querySelector(_globals.Selectors.CONTENT);
       var data = (0, _find2.default)(this.store, function (data) {
         return data.popper === popper;
