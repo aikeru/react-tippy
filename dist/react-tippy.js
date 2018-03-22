@@ -2158,6 +2158,9 @@ var Tippy = function () {
       var data = (0, _find2.default)(this.store, function (data) {
         return data.popper === popper;
       });
+      if (data === undefined) {
+        return;
+      }
       var newSettings = _extends({}, data.settings, _defineProperty({}, name, value));
       data.settings = newSettings;
     }
@@ -2180,6 +2183,9 @@ var Tippy = function () {
         return data.popper === popper;
       });
 
+      if (data === undefined) {
+        return;
+      }
       var _data$settings = data.settings,
           useContext = _data$settings.useContext,
           reactInstance = _data$settings.reactInstance;
@@ -2221,6 +2227,11 @@ var Tippy = function () {
 
       // Custom react
       if (data && data.settings && data.settings.open === false) {
+        return;
+      }
+
+      if (data === undefined) {
+        console.error('Data missing in show');
         return;
       }
 
@@ -2321,6 +2332,10 @@ var Tippy = function () {
       var data = (0, _find2.default)(this.store, function (data) {
         return data.popper === popper;
       });
+      if (data === undefined) {
+        console.error('Data missing in hide');
+        return;
+      }
 
       var _getInnerElements2 = (0, _getInnerElements5.default)(popper),
           tooltip = _getInnerElements2.tooltip,
@@ -2408,6 +2423,10 @@ var Tippy = function () {
       var data = (0, _find2.default)(this.store, function (data) {
         return data.popper === popper;
       });
+      if (data === undefined) {
+        console.error('Data missing in update');
+        return;
+      }
 
       var _getInnerElements3 = (0, _getInnerElements5.default)(popper),
           content = _getInnerElements3.content;

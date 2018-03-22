@@ -112,6 +112,7 @@ class Tippy {
 
   updateSettings(popper, name, value) {
     const data = find(this.store, data => data.popper === popper)
+    if(data === undefined) { return }
     const newSettings = {
       ...data.settings,
       [name]: value,
@@ -132,6 +133,7 @@ class Tippy {
     const tooltipContent = popper.querySelector(Selectors.CONTENT)
     const data = find(this.store, data => data.popper === popper)
 
+    if(data === undefined) { return }
     const {
       useContext,
       reactInstance,
@@ -171,6 +173,11 @@ class Tippy {
     // Custom react
     if (data && data.settings && data.settings.open === false) {
       return;
+    }
+
+    if(data === undefined) {
+      console.error('Data missing in show')
+      return
     }
 
     if (data.settings.reactDOM) {
@@ -267,6 +274,10 @@ class Tippy {
     this.callbacks.hide.call(popper)
 
     const data = find(this.store, data => data.popper === popper)
+    if(data === undefined) {
+      console.error('Data missing in hide')
+      return
+    }
     const { tooltip, circle, content } = getInnerElements(popper)
 
     // custom react
@@ -351,6 +362,10 @@ class Tippy {
     if (this.state.destroyed) return
 
     const data = find(this.store, data => data.popper === popper)
+    if(data === undefined) {
+      console.error('Data missing in update')
+      return
+    }
     const { content } = getInnerElements(popper)
     const { el, settings: { html } } = data
 
