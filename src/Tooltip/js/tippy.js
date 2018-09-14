@@ -390,6 +390,7 @@ class Tippy {
     if (this.state.destroyed) return
 
     const data = find(this.store, data => data.popper === popper)
+    if(!data) { return }
 
     const {
       el,
